@@ -5,9 +5,9 @@ const cfg = require('../../../config')
 const User = require('../../../models/users')
 var router = express.Router();
 
-const signToken = (u, k) => {
+const signToken = (id, age) => {
   return new Promise((resolve, reject) => {
-    jwt.sign({ name: u.name, age: u.age }, k, (err, token) => {
+    jwt.sign({id,age}, cfg.secretKey, (err, token) => {
       if (err) reject(err)
       resolve(token)
     })

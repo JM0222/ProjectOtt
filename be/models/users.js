@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
-const cfg = require('../config')
-
+const cfg = require('../config/index.js')
+// console.log('cfg',cfg.admin.id)
+// console.log(cfg.secretKey)
+// mongoose 업데이트 오류 뜨는거 방지
 mongoose.set('useCreateIndex', true)
 const userSchema = new mongoose.Schema({
     name: { type: String, default: '', index: true },
@@ -11,8 +13,9 @@ const userSchema = new mongoose.Schema({
   })
 
 const User = mongoose.model('User', userSchema)
+// unique 키 drop 시키기
 User.collection.dropIndexes({ name: 1 })
-console.log('cfg',cfg.admin)
+
 
 User.findOne({ id: cfg.admin.id })
   .then((r) => {

@@ -30,7 +30,6 @@ const routes = [
     name: 'Login',
     component: () => import('../views/sign.vue')
   },
-
   {
     path: '*',
     name: 'e404',

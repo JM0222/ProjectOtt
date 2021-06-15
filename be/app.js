@@ -21,8 +21,8 @@ const User = require('./models/users')
 mongoose.connect('mongodb://localhost:27017/nemv', { useNewUrlParser: true }, (err) => {
    if (err) return console.error(err)
    console.log('mongoose connected!')
-    .then(r => console.log(r))
-    .catch(e => console.error(e))
+    // .then(r => console.log(r))
+    // .catch(e => console.error(e))
 })
 
 // view engine setup
@@ -34,13 +34,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use('/api', require('./routes/api'))
+app.use(history());
 // be , fe 연결 (dist)
 app.use(express.static(path.join(__dirname, 'fe', 'dist')));
 
 
-app.use('/api', require('./routes/api/index.js'))
-app.use(history());
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -64,6 +64,6 @@ app.use(function(err, req, res, next) {
 //       resolve(v)
 //     })
 //   })
-// }
+// 
 
 module.exports = app;

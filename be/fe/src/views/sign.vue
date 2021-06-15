@@ -9,8 +9,8 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field prepend-icon="person" v-model="form.id" label="아이디" type="text"></v-text-field>
-              <v-text-field prepend-icon="lock" v-model="form.pwd" label="비밀번호" type="password"></v-text-field>
+              <v-text-field  v-model="form.id" label="아이디" type="text"></v-text-field>
+              <v-text-field v-model="form.pwd" label="비밀번호" type="password"></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -38,11 +38,7 @@ export default {
   methods: {
     signIn () {
       axios.post('http://localhost:3000/api/sign/in', this.form)
-        .then(r => {
-          if (!r.data.success) return console.error(r.data.msg)
-          localStorage.setItem('token', r.data.token)
-          this.$router.push('/header')         
-        })
+        .then(r => console.log(r.data))
         .catch(e => console.error(e.message))
     }
   }
